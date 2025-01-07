@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shopping_list/components/item_tile.dart';
 import 'package:shopping_list/models/cart_model.dart';
+import 'package:shopping_list/pages/cart_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,6 +13,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -43,6 +45,10 @@ class HomePage extends StatelessWidget {
                       return ItemTile(
                         itemName: value.shopItems[index][0],
                         itemPrice: value.shopItems[index][1],
+                        onTap: () {
+                          Provider.of<CartModel>(context, listen: false)
+                              .addItem(index);
+                        },
                       );
                     },
                   );
@@ -50,6 +56,18 @@ class HomePage extends StatelessWidget {
               ),
             )
           ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.black,
+        shape: CircleBorder(),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => CartPage()));
+        },
+        child: Icon(
+          Icons.shopping_bag,
+          color: Colors.white,
         ),
       ),
     );

@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 class ItemTile extends StatelessWidget {
   final String itemName;
   final double itemPrice;
+  final void Function()? onTap;
 
-  const ItemTile({super.key, required this.itemName, required this.itemPrice});
+  const ItemTile(
+      {super.key,
+      required this.itemName,
+      required this.itemPrice,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +32,7 @@ class ItemTile extends StatelessWidget {
             height: 8.0,
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: onTap,
             child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
                 decoration: BoxDecoration(
